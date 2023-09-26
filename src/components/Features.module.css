@@ -1,0 +1,20 @@
+.featureWrapper {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.featureIcon {
+  background-color: #F0EEFF;
+  border-radius: 14px;
+  padding: 20px;
+}
+
+.featureIcon svg {
+  color: #6C5DD3;
+  font-size: 32px;
+}
+
+.featureContent {
+  padding-block: 24px;
+}

@@ -1,0 +1,46 @@
+.leftSide {
+  padding-block: 92px;
+  border-radius: 24px;
+  position: relative;
+  background-color: #F2F0FE;
+}
+
+.topLeft {
+  position: absolute;
+  top: 30px;
+  left: 40px;
+}
+
+.topRight {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 60%;
+  border-top-right-radius: 24px;
+}
+
+.bottomCenter {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-inline: auto;
+}
+
+.heroContent {
+  margin-left: 90px;
+  max-width: 500px;
+}
+
+.heroContent h4 {
+  color: #6C5DD3;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 4px;
+}
+
+.rightSide {
+  padding-block: 30px;
+  background-color: #9C9C9C;
+  border-radius: 24px;
+}
