@@ -1,16 +1,17 @@
 import Logo from '../assets/logo.svg';
+import { Link } from 'react-router-dom';
 
-const Header = () => {
+const HeaderNavigation = () => {
   return (
     <div className='container py-3'>
       <div className='row align-items-center'>
         <div className='col-lg-3'>
-          <a
+          <Link
             className='navbar-brand'
-            href='#'
+            to='/'
           >
             <img src={Logo} />
-          </a>
+          </Link>
         </div>
         <div className='col-lg-9 text-right'>
           <div className='row align-items-center'>
@@ -26,8 +27,8 @@ const Header = () => {
               </div>
             </div>
             <div className='col-lg-3'>
-              <button>Login</button>
-              <button>Sign up</button>
+              <Link to='/login'>Login</Link>
+              <Link to='/signup'>Sign up</Link>
             </div>
           </div>
         </div>
@@ -36,4 +37,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default HeaderNavigation;
