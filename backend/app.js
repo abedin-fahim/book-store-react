@@ -1,52 +1,29 @@
 const express = require('express');
-const fs = require('fs/promises');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+const helmet = require('helmet');
+const morgan = require('morgan');
+const { authenticateToken } = require('./middleware/auth-middleware');
+const eventsRoute = require('./routes/events');
+const protectedRoutes = require('./routes/protected');
+const authRoutes = require('./routes/auth'); // Import the combined auth route
+require('dotenv').config();
 
 const app = express();
+const port = process.env.PORT || 5001;
 
+// Middleware
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(cors());
+app.use(helmet());
+// app.use(morgan('combined'));
 
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader(
-    'Access-Control-Allow-Methods',
-    'GET, POST, PUT, DELETE, OPTIONS'
-  );
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-Requested-With,content-type'
-  );
-  next();
-});
+// Routes as middleware
+app.use(eventsRoute);
+app.use('/api', protectedRoutes);
+app.use('/api', authRoutes);
 
-app.get('/books', async (req, res) => {
-  // const { max, search } = req.query;
-  const booksFileContent = await fs.readFile('./data/books.json');
-  let books = JSON.parse(booksFileContent);
-
-  // if (search) {
-  //   books = books.filter((book) => {
-  //     const searchableText = `${book.title} ${book.description} ${book.location}`;
-  //     return searchableText.toLowerCase().includes(search.toLowerCase());
-  //   });
-  // }
-
-  // if (max) {
-  //   books = books.slice(books.length - max, books.length);
-  // }
-
-  res.json({
-    books: books.map((book) => ({
-      id: book.id,
-      title: book.title,
-      image: book.image,
-      date: book.date,
-      location: book.location,
-    })),
-  });
-});
-
-app.listen(3001, () => {
-  console.log('Server running on port 3000');
+// Server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
